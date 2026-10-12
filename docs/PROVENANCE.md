@@ -8,7 +8,7 @@ Useful engineering ideas retained at the design level are explicit axle referenc
 
 ## Portfolio export history
 
-This repository starts from an owner-approved file-tree export of the completed standalone toolkit, with an independent Git history. The clean initial commit records preparation for portfolio publication; its author and committer metadata do not establish original individual authorship of any historical university team project. The mathematical attributions and implementation boundaries below remain unchanged. Historical development commits, pull requests, workflow run records and original release metadata are retained separately by the owner rather than imported into this history.
+This repository starts from an owner-approved file-tree export of the completed standalone toolkit, with an independent Git history. The clean initial commit records preparation for portfolio publication; its author and committer metadata do not establish original individual authorship of any historical university team project. The mathematical attributions and implementation boundaries below remain unchanged. Historical development commits, pull requests, workflow run records and original release metadata were not imported into this history. The former development repository was subsequently deleted, and the `v0.1.0` tag and Release were recreated against the clean history.
 
 This independent history does not erase cached or independently cloned copies of previously public development history.
 
