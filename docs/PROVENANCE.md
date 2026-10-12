@@ -10,7 +10,7 @@ Useful engineering ideas retained at the design level are explicit axle referenc
 
 This repository starts from an owner-approved file-tree export of the completed standalone toolkit, with an independent Git history. The clean initial commit records preparation for portfolio publication; its author and committer metadata do not establish original individual authorship of any historical university team project. The mathematical attributions and implementation boundaries below remain unchanged. Historical development commits, pull requests, workflow run records and original release metadata are retained separately by the owner rather than imported into this history.
 
-The clean repository is initially private staging. Repository-name cutover, public visibility, a release and Profile pinning require separate owner approval. Rebuilding the history does not remove copies or caches of previously public development history.
+This independent history does not erase cached or independently cloned copies of previously public development history.
 
 ## Mathematical references
 

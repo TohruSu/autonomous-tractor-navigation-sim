@@ -1,6 +1,6 @@
 # Validation record and project scope
 
-This standalone C# simulation toolkit retains the owner-approved [MIT License](../LICENSE). This clean repository is private staging; a public release has not been created in its independent history. This record preserves the testing methodology, recorded results, validation provenance and limitations. Synthetic simulation results do not establish real vehicle performance or safety.
+This standalone C# simulation toolkit retains the owner-approved [MIT License](../LICENSE). This record preserves the testing methodology, recorded results, validation provenance and limitations. Synthetic simulation results do not establish real vehicle performance or safety.
 
 ## Recorded local validation — Codex-reported
 
@@ -22,7 +22,9 @@ Test budgets were fixed before execution in `VALIDATION_PLAN.md`; its initial SH
 
 The earlier private integration's GitHub-hosted push and pull-request workflows both completed successfully. Independent review of run/job records **and raw hosted logs** confirmed 61 passing tests, 28/28 completed comparisons, zero build warnings/errors, and byte-identical CSV checks. These hosted outcomes are distinct from the original Codex-reported local validation.
 
-The original standalone repository's root GitHub Actions workflow separately completed successfully before this portfolio export. Independent raw-log review confirmed 61/61 tests, two completed 28/28 comparisons, byte-identical repeated CSVs, and zero warnings/errors. These are historical source-validation records, not a claim that the new staging workflow has run. Their original commit and run identifiers are retained in the owner's private migration evidence rather than linked from this independent history. The retained workflow also generates a synthetic SVG from CSV using Python 3's standard library and checks it matches the checked-in diagram byte-for-byte. Consult this repository's Actions tab for its own run outcome.
+The original standalone repository's root GitHub Actions workflow separately completed successfully before this portfolio export. Independent raw-log review confirmed 61/61 tests, two completed 28/28 comparisons, byte-identical repeated CSVs, and zero warnings/errors. These historical source-validation records and their original commit and run identifiers are retained in the owner's development archive rather than imported into this independent history.
+
+This repository's own [GitHub Actions run 38285188430](https://github.com/TohruSu/autonomous-tractor-navigation-sim/actions/runs/38285188430) completed successfully at clean commit `f9d4a9a0824c686507e0688ba223fcae619069ba`. Its complete validation passed **61/61 deterministic tests**, two completed **28/28** comparisons, and byte-identical repeated `summary.csv` and `samples.csv`. The independent visualization step regenerated the synthetic SVG from simulation CSVs and verified it matched the checked-in diagram byte-for-byte. These results are supported by the successful run/job/step conclusions, fixed test registration and retained validation assertions. Consult this repository's Actions tab for subsequent runs.
 
 ## Comparison outcome
 
