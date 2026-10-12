@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/TractorNavigation.Core/TractorNavigation.Core.csproj" />
+  <Project Path="src/TractorNavigation.Cli/TractorNavigation.Cli.csproj" />
+  <Project Path="tests/TractorNavigation.Tests/TractorNavigation.Tests.csproj" />
+</Solution>

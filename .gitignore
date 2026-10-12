@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+artifacts/
+*.user
+*.suo
+.vs/
+.idea/
+.DS_Store
+# Keep project/solution files tracked when created by IDEs.
+!*.csproj
+!*.slnx
