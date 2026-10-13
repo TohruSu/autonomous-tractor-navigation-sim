@@ -8,7 +8,7 @@ Compare Stanley and Pure Pursuit on synthetic straight and curved routes using a
 
 The diagram compares two nominal controllers on the same **synthetic** radius-6 m left turn with a +0.5 m initial lateral offset. Trajectory traces and RMS cross-track errors are produced by the simulator, not field measurements. The chart is regenerated and checked for byte-for-byte consistency in CI; it illustrates one scenario rather than a general controller ranking.
 
-The project has no Unity, sensor, network, actuator, or external NuGet dependencies. Historical implementations and recorded data are excluded. New implementations use the mathematical sources acknowledged in [provenance](docs/PROVENANCE.md).
+The project is self-contained, with no Unity, sensor, network, actuator, or external NuGet dependencies. Algorithm references and implementation details are documented in [Provenance](docs/PROVENANCE.md).
 
 ## Requirements and commands
 
@@ -59,7 +59,7 @@ python3 scripts/plot_trajectories.py --samples artifacts/chart-review/samples.cs
 cmp docs/images/tracking-comparison.svg artifacts/chart-review.svg
 ```
 
-The SVG corresponds to the nominal Stanley and Pure Pursuit configurations in the `left-turn-offset` scenario. The reference arc comes from the same documented synthetic route equation as `RouteFactory.Arc`. CI checks that the committed SVG agrees with the simulator. These are simulated, not real-tractor trajectories.
+The SVG corresponds to the nominal Stanley and Pure Pursuit configurations in the `left-turn-offset` scenario. The reference arc comes from the same documented synthetic route equation as `RouteFactory.Arc`. CI checks that the committed SVG agrees with the simulator.
 
 ## Modules and results
 
@@ -77,8 +77,8 @@ This is a constant-speed, planar, no-slip kinematic model with sampled polylines
 
 Reproducibility is tested within the same SDK/runtime and architecture. Cross-platform floating-point byte identity and controller optimality are not promised. Numerical failure is a result, never a discarded run.
 
-[Validation review](docs/PUBLICATION_REVIEW.md) records local and hosted validation provenance, comparison results, scope and limitations. [Export instructions](docs/EXPORT.md) describe the self-contained file allowlist and clean-export validation. Mathematical references and implementation adaptations are recorded in [provenance](docs/PROVENANCE.md).
+[Validation review](docs/PUBLICATION_REVIEW.md) documents automated checks, comparison results, reproducibility and limitations. [Export instructions](docs/EXPORT.md) describe the self-contained file allowlist and clean-export validation. Mathematical references and implementation adaptations are recorded in [provenance](docs/PROVENANCE.md).
 
 ## License
 
-The [MIT License](LICENSE), copyright 2026 TohruSu, covers this standalone project's newly implemented source, tests and documentation. The license does not relicense excluded historical materials or claim ownership of the established algorithms; their published sources remain attributed.
+Released under the [MIT License](LICENSE). Mathematical references for Stanley, Pure Pursuit, and the kinematic bicycle model are documented in [Provenance](docs/PROVENANCE.md).

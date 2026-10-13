@@ -1,16 +1,10 @@
 # Source provenance and algorithm attribution
 
-All executable source in this standalone project was newly implemented from mathematical definitions with AI assistance. The owner reviewed the implementation and provenance records and approved MIT distribution of the newly implemented standalone source, tests and documentation. No historical teacher example, Unity script, sandbox controller, diagnostic implementation or recorded CSV was extracted into this project. This is not a claim that historical project modules were all independently owned.
+## Implementation provenance
 
-Implementation contributors for geometry/controllers, dynamics/evaluation and tests received a mathematical API contract and synthetic acceptance requirements; they were instructed not to inspect or reuse historical source. A separate audit examined historical overlap. This separation supports the provenance and exclusion decisions; it is not a legal certification of ownership.
+All executable source in this standalone project was newly implemented from mathematical definitions with AI assistance. Geometry, controllers, dynamics, evaluation and tests were developed for this toolkit using a mathematical API contract and synthetic acceptance requirements. Historical teacher/reference examples, Unity scripts, sandbox controllers, diagnostic implementations and recorded CSVs were not reused as source or result baselines.
 
-Useful engineering ideas retained at the design level are explicit axle references, mirrored synthetic scenarios, bounded steering, deterministic tests and CSV comparison. Those ideas are implemented afresh. The historical custom controller was omitted because its independent provenance could not be established from the available mixed-origin source.
-
-## Portfolio export history
-
-This repository starts from an owner-approved file-tree export of the completed standalone toolkit, with an independent Git history. The clean initial commit records preparation for portfolio publication; its author and committer metadata do not establish original individual authorship of any historical university team project. The mathematical attributions and implementation boundaries below remain unchanged. Historical development commits, pull requests, workflow run records and original release metadata were not imported into this history. The former development repository was subsequently deleted, and the `v0.1.0` tag and Release were recreated against the clean history.
-
-This independent history does not erase cached or independently cloned copies of previously public development history.
+Design-level ideas include explicit axle references, mirrored synthetic scenarios, bounded steering, deterministic tests and CSV comparison. The historical custom controller was omitted because its independent provenance could not be established from the available mixed-origin source.
 
 ## Mathematical references
 
@@ -21,17 +15,13 @@ This independent history does not erase cached or independently cloned copies of
 
 These references acknowledge algorithmic ideas; no source code or figures from them are bundled. Standard algorithm names do not imply reproduction of the published systems.
 
-## File decisions
+## Implementation layout
 
-- All `src/TractorNavigation.Core/**/*.cs`: new geometry, controller, scenario, dynamics and evaluation implementations from the definitions above.
-- All `src/TractorNavigation.Cli/**/*.cs`: new argument handling and CSV formatting; no historical logging or device interface.
-- All `tests/TractorNavigation.Tests/**/*.cs`: new analytic expectations and synthetic integration checks; no historical test or result baseline.
-- Project files, scripts and public documentation: new standalone build/test/export configuration and explanations.
-- Teacher/reference modules, historical custom and diagnostic controllers, checkpoint archives, Unity scenes/assets, third-party Unity packages, AR/GNSS/UDP/actuator code and identifying logs: excluded in full.
-- Private source-audit and delivery documents: excluded from the standalone project and every export; they are review records, not distributed project inputs.
+- `src/TractorNavigation.Core/**/*.cs`: geometry, controller, scenario, dynamics and evaluation implementations from the definitions above.
+- `src/TractorNavigation.Cli/**/*.cs`: argument handling and CSV formatting, with no historical logging or device interface.
+- `tests/TractorNavigation.Tests/**/*.cs`: analytic expectations and synthetic integration checks, with no historical test or result baseline.
+- Project files, scripts and documentation: standalone build, validation, export configuration and explanations.
 
-## License boundary
+## License
 
-The root [LICENSE](../LICENSE) contains the standard MIT License with `Copyright (c) 2026 TohruSu`. The owner's approval applies to this standalone project's newly implemented source, tests and documentation. It does not extend to historical Unity source, teacher/reference implementations, mixed-origin controllers, third-party packages or assets, excluded development materials, or ownership of the Stanley and Pure Pursuit algorithms themselves. No historical code has been relicensed.
-
-The references above identify established mathematical ideas, not algorithms invented by the owner. The implementation separation and review support the exclusion decisions; they do not constitute a formal certification of exclusive ownership.
+The root [LICENSE](../LICENSE) contains the standard MIT License with `Copyright (c) 2026 TohruSu`, covering this standalone project's newly implemented source, tests and documentation. It does not extend to excluded historical code, third-party packages or assets, or ownership of the established mathematical algorithms. The cited ideas predate this implementation and remain attributed to their published sources.

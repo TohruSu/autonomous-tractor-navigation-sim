@@ -1,34 +1,27 @@
 # Validation record and project scope
 
-This standalone C# simulation toolkit retains the owner-approved [MIT License](../LICENSE). This record preserves the testing methodology, recorded results, validation provenance and limitations. Synthetic simulation results do not establish real vehicle performance or safety.
+This record documents automated checks, reproducible simulation results and the scope of the standalone C# toolkit. Source, tests and documentation are released under the [MIT License](../LICENSE); algorithm attribution is recorded in [Provenance](PROVENANCE.md).
 
-## Recorded local validation — Codex-reported
+## Validation Environment
 
-The following local results were reported by Codex and reviewed by the owner. The recorded validation on 2026-10-12 used Debian x86-64, .NET SDK 10.0.401 / runtime 10.0.12:
+[GitHub Actions run 38292295510](https://github.com/TohruSu/autonomous-tractor-navigation-sim/actions/runs/38292295510) passed at commit `d02d02be91c2f85c5a415966e651b15675c076cf` on Ubuntu 24.04 x86-64 with .NET SDK 10.0.401 and runtime 10.0.12. Its logs confirm the build, tests, complete comparisons and reproduction checks below.
+
+The workflow runs `bash scripts/validate.sh` and separately regenerates and compares the tracked SVG. Dependencies are supplied by the SDK, and `NuGet.Config` disables external package sources.
+
+## Automated Tests
 
 - **61 passed, 0 failed, 0 skipped** in the deterministic console test harness.
 - Offline restore and Release solution build succeeded with **0 warnings and 0 errors**.
-- All **28/28** comparison runs completed: seven synthetic routes against four controller configurations.
-- Two full CLI runs produced byte-identical `summary.csv` and `samples.csv`; each retained **14,342 state observations**.
-- Deliberate stationary timeout and extreme-speed numerical failure exported explicit statuses and returned exit 2. The numerical-failure export visibly retained Infinity in its candidate state and NaN in undefined metrics.
-- Nine invalid/unsupported CLI cases returned exit 64, including duplicate/unknown arguments, existing output, invalid numbers and excessive comparison allocation.
-- A literal allowlisted export built and ran the same full workflow outside the source checkout, with no parent repository, fresh build outputs, a new CLI home and an empty package cache. The SDK itself was the previously installed, checksum-verified SDK; this is not a claim of a newly provisioned machine.
-- Public file scanning found no credential patterns, IP addresses, private repository identifiers, external source links or package references. All project references resolve inside the export.
-- Export with a trailing slash worked; a symlinked source ancestor was rejected and the helper cleaned its own temporary directory.
+- Nine invalid or unsupported CLI cases returned exit 64, including duplicate/unknown arguments, existing output, invalid numbers and excessive comparison allocation.
+- Deliberate stationary timeout and extreme-speed numerical failure exported explicit statuses and returned exit 2. The numerical-failure checks preserve Infinity in the candidate state and NaN in undefined metrics.
 
-Test budgets were fixed before execution in `VALIDATION_PLAN.md`; its initial SHA-256 was `c36ee085b1ab3e6a0b5a3ee9ad1f8d3ee5ce4b6bc09310b61d6ad3cef5cbcc8f` and remained unchanged. Numerical regressions were added for discovered timestamp overflow, zero-yaw unused arithmetic overflow, sub-step duration, and extremely unequal coordinate scales. Controller defaults and tracking acceptance budgets were unchanged.
+The harness also covers stationary, insufficient-horizon and infeasible-route timeouts, nonfinite requests, throwing controllers and nonfinite integration. These expected outcomes are checked by passing tests. Numerical regressions cover timestamp overflow, zero-yaw unused arithmetic overflow, sub-step duration and extremely unequal coordinate scales.
 
-## Recorded hosted validation — independently reviewed
+Acceptance budgets were fixed before execution in [VALIDATION_PLAN.md](VALIDATION_PLAN.md). Controller defaults and tracking acceptance budgets remain unchanged.
 
-The earlier private integration's GitHub-hosted push and pull-request workflows both completed successfully. Independent review of run/job records **and raw hosted logs** confirmed 61 passing tests, 28/28 completed comparisons, zero build warnings/errors, and byte-identical CSV checks. These hosted outcomes are distinct from the original Codex-reported local validation.
+## Simulation Results
 
-The original standalone repository's root GitHub Actions workflow separately completed successfully before this portfolio export. Independent raw-log review confirmed 61/61 tests, two completed 28/28 comparisons, byte-identical repeated CSVs, and zero warnings/errors. These historical results were reviewed at the time; the former development repository was subsequently deleted, so this record does not imply that its old commits or Actions logs remain accessible.
-
-This repository's own [GitHub Actions run 38285188430](https://github.com/TohruSu/autonomous-tractor-navigation-sim/actions/runs/38285188430) completed successfully at clean commit `f9d4a9a0824c686507e0688ba223fcae619069ba`. Its complete validation passed **61/61 deterministic tests**, two completed **28/28** comparisons, and byte-identical repeated `summary.csv` and `samples.csv`. The independent visualization step regenerated the synthetic SVG from simulation CSVs and verified it matched the checked-in diagram byte-for-byte. These results are supported by the successful run/job/step conclusions, fixed test registration and retained validation assertions. Consult this repository's Actions tab for subsequent runs.
-
-## Comparison outcome
-
-The maximum RMS below is across all seven routes for each configuration, including initial displaced samples; it is not a general ranking or a hardware measurement.
+Two complete comparisons each finished **28/28** runs: seven routes against four controller configurations. The maximum RMS below is across all seven routes for each configuration, including initial displaced samples; it is not a general ranking or a hardware measurement.
 
 | Configuration | Completed | Largest RMS error | Largest absolute error |
 | --- | ---: | ---: | ---: |
@@ -37,20 +30,24 @@ The maximum RMS below is across all seven routes for each configuration, includi
 | Stanley gain 0.5, softening 0.5 | 7/7 | 0.284152 m | 0.500000 m |
 | Pure Pursuit lookahead 2, speed gain 0.3 | 7/7 | 0.213070 m | 0.500000 m |
 
-No nominal comparison failed. Tests also verified retained stationary, insufficient-horizon and infeasible-route timeouts, nonfinite requests, throwing controllers and nonfinite integration. These are expected failure cases, distinct from the 61 passing test cases.
+No nominal comparison failed. Status and failure reason remain part of every exported run.
 
-## Source and scope review
+## Reproducibility
 
-- Historical files remain untouched. The new library/project references are wholly inside this directory; external package sources are empty.
-- Source and tests are new implementations of acknowledged mathematical definitions. Historical teacher/reference/mixed-origin source, custom controllers, checkpoints, source archives and CSV baselines are excluded.
-- Synthetic scenarios contain no imported coordinates. No Unity/AR, sensor, GNSS/UDP, actuator or network interfaces are required or bundled.
-- `PUBLIC_EXPORT.txt` is a literal 49-file allowlist, including the approved MIT `LICENSE` and root CI workflow. It excludes private audit/delivery documents, historical material, generated CSV outputs, `bin/`, `obj/` and caches.
-- Historical source comparisons, provenance uncertainties and exclusion decisions were reviewed separately. Private audit/delivery records are not distributed project files or build inputs.
+Repeated comparisons produced byte-identical `summary.csv` and `samples.csv`. The visualization step regenerated `docs/images/tracking-comparison.svg` from the simulator's nominal `left-turn-offset` CSV results and compared it exactly with the tracked figure. The reference arc uses the documented analytic route equation, and `scripts/plot_trajectories.py` uses Python's standard library without third-party plotting dependencies.
 
-## License and simulation limitations
+Additional local validation used Debian x86-64 with the same SDK/runtime:
 
-The synthetic README figure at `docs/images/tracking-comparison.svg` is generated from the same simulator's nominal `left-turn-offset` CSV results, with the documented analytic reference arc. No historical coordinates or third-party plotting dependencies are included. Its deterministic generator is `scripts/plot_trajectories.py`.
+- Full CLI comparisons each recorded **14,342 state observations**.
+- A literal 49-file allowlisted export built and ran the complete validation workflow outside the source checkout, with fresh build outputs, a new CLI home and an empty package cache. All project references resolved inside the export; the check reused the installed, checksum-verified SDK.
+- The export helper accepted a trailing slash, rejected a symlinked source ancestor and cleaned its temporary directory.
 
-The root [LICENSE](../LICENSE) is the standard MIT License with `Copyright (c) 2026 TohruSu`. Approval covers the newly implemented standalone source, tests and documentation; it does not license excluded historical materials, third-party components or the established algorithms themselves. Attribution to Coulter, Thrun et al. and LaValle is retained in [provenance](PROVENANCE.md).
+These export checks and the observation count are local results. [EXPORT.md](EXPORT.md) documents the export procedure, and `PUBLIC_EXPORT.txt` defines the file allowlist. Generated CSVs, binaries and caches are excluded.
 
-No optional custom controller is included. The constant-speed kinematic simulation establishes no physical vehicle safety, obstacle-avoidance capability, sensor/GNSS integration, dynamic physics or field-measured accuracy. Comparisons cover the declared synthetic routes and parameters and do not establish general controller superiority. Floating-point byte identity is checked within the same SDK/runtime and architecture, not promised across all platforms.
+## Scope and Limitations
+
+The constant-speed, planar, no-slip kinematic model uses sampled polylines, ideal state knowledge and deterministic steering limits. It omits tire/soil forces, slopes, actuator dynamics, sensing, latency, localization, collision checking and obstacle planning. The global nearest-point search is intended for simple nonintersecting routes. Steering feasibility does not guarantee route completion; statuses must be considered alongside error metrics.
+
+The scenarios use generated geometry without imported coordinates. No Unity/AR, sensor, GNSS/UDP, actuator or network interfaces are required or bundled. No optional custom controller is included.
+
+The results do not establish real-vehicle performance or safety, physical dynamics, obstacle-avoidance capability or field-measured accuracy. Comparisons cover the declared routes and parameters and do not establish general controller superiority. Floating-point byte identity is checked within the same SDK/runtime and architecture, not promised across all platforms. Numerical failure remains an explicit result.
